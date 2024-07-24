@@ -1,0 +1,2734 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthPhoneResponseDto {
+  accessToken: String!
+}
+
+type AuthPhoneResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: AuthPhoneResponseDto
+}
+
+type UserClient {
+  id: ID!
+  gender: String
+  first_name: String
+  last_name: String
+  email: String
+  avatar: String
+  last_login: DateTime
+  created_at: DateTime
+  updated_at: DateTime
+  email_verified: Boolean
+  phone_number: String
+  is_active: Boolean
+  city: String
+  state: String
+  country: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type AuthResponseDto {
+  accessToken: String!
+  renewAccessToken: String!
+  user: UserClient!
+}
+
+type RenewTokenResponseDto {
+  accessToken: String!
+}
+
+type AuthResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: AuthResponseDto
+}
+
+type RenewTokenResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: RenewTokenResponseDto
+}
+
+type oauth_identities {
+  id: ID!
+  user_id: String!
+  provider_name: providers!
+  provider_id: String!
+  expires_at: DateTime
+  users: users!
+}
+
+enum providers {
+  Google
+  Facebook
+  LinkedIn
+  Apple
+}
+
+type user_otps {
+  id: ID!
+  user_id: String!
+  otp_value: String!
+  count: Int
+  expires_at: DateTime
+  created_at: DateTime
+  is_used: Boolean
+  purpose: String
+  users: users!
+}
+
+type user_permissions {
+  id: Int!
+  user_id: String!
+  permission_id: Int!
+  granted: Boolean!
+  granted_at: DateTime
+  revoked_at: DateTime
+  permissions: permissions!
+  users: users!
+}
+
+type UsersCount {
+  oauth_identities: Int!
+  user_permissions: Int!
+  user_roles: Int!
+}
+
+type users {
+  id: ID!
+  email: String
+  password: String
+  first_name: String
+  last_name: String
+  gender: gender
+  created_at: DateTime
+  updated_at: DateTime
+  email_verified: Boolean
+  last_login: DateTime
+  avatar: String
+  phone_number: String
+  reset_token: String
+  is_active: Boolean
+  reset_token_expiry: DateTime
+  city: String
+  state: String
+  country: String
+  oauth_identities: [oauth_identities!]
+  user_otps: user_otps
+  user_permissions: [user_permissions!]
+  user_roles: [user_roles!]
+  _count: UsersCount!
+}
+
+enum gender {
+  Male
+  Female
+  Others
+}
+
+type user_roles {
+  id: Int!
+  user_id: String!
+  role_id: Int!
+  roles: roles!
+  users: users!
+}
+
+type RolesCount {
+  role_permissions: Int!
+  user_roles: Int!
+}
+
+type roles {
+  id: ID!
+  name: String!
+  description: String
+  is_active: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+  role_permissions: [role_permissions!]
+  user_roles: [user_roles!]
+  _count: RolesCount!
+}
+
+type role_permissions {
+  id: Int!
+  role_id: Int!
+  permission_id: Int!
+  created_at: DateTime
+  updated_at: DateTime
+  permissions: permissions!
+  roles: roles!
+}
+
+type PermissionsCount {
+  role_permissions: Int!
+  user_permissions: Int!
+}
+
+type permissions {
+  id: ID!
+  module_id: Int!
+  name: String!
+  description: String
+  is_enabled: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+  modules: modules!
+  role_permissions: [role_permissions!]
+  user_permissions: [user_permissions!]
+  _count: PermissionsCount!
+}
+
+type ModulesCount {
+  permissions: Int!
+}
+
+type modules {
+  id: ID!
+  name: String!
+  description: String
+  created_at: DateTime
+  updated_at: DateTime
+  permissions: [permissions!]
+  _count: ModulesCount!
+}
+
+type ModulesCountAggregate {
+  id: Int!
+  name: Int!
+  description: Int!
+  created_at: Int!
+  updated_at: Int!
+  _all: Int!
+}
+
+type ModulesAvgAggregate {
+  id: Float
+}
+
+type ModulesSumAggregate {
+  id: Int
+}
+
+type ModulesMinAggregate {
+  id: Int
+  name: String
+  description: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type ModulesMaxAggregate {
+  id: Int
+  name: String
+  description: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type AggregateModules {
+  _count: ModulesCountAggregate
+  _avg: ModulesAvgAggregate
+  _sum: ModulesSumAggregate
+  _min: ModulesMinAggregate
+  _max: ModulesMaxAggregate
+}
+
+type PermissionsCountAggregate {
+  id: Int!
+  module_id: Int!
+  name: Int!
+  description: Int!
+  is_enabled: Int!
+  created_at: Int!
+  updated_at: Int!
+  _all: Int!
+}
+
+type PermissionsAvgAggregate {
+  id: Float
+  module_id: Float
+}
+
+type PermissionsSumAggregate {
+  id: Int
+  module_id: Int
+}
+
+type PermissionsMinAggregate {
+  id: Int
+  module_id: Int
+  name: String
+  description: String
+  is_enabled: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type PermissionsMaxAggregate {
+  id: Int
+  module_id: Int
+  name: String
+  description: String
+  is_enabled: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type AggregatePermissions {
+  _count: PermissionsCountAggregate
+  _avg: PermissionsAvgAggregate
+  _sum: PermissionsSumAggregate
+  _min: PermissionsMinAggregate
+  _max: PermissionsMaxAggregate
+}
+
+type RolesCountAggregate {
+  id: Int!
+  name: Int!
+  description: Int!
+  is_active: Int!
+  created_at: Int!
+  updated_at: Int!
+  _all: Int!
+}
+
+type RolesAvgAggregate {
+  id: Float
+}
+
+type RolesSumAggregate {
+  id: Int
+}
+
+type RolesMinAggregate {
+  id: Int
+  name: String
+  description: String
+  is_active: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type RolesMaxAggregate {
+  id: Int
+  name: String
+  description: String
+  is_active: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type AggregateRoles {
+  _count: RolesCountAggregate
+  _avg: RolesAvgAggregate
+  _sum: RolesSumAggregate
+  _min: RolesMinAggregate
+  _max: RolesMaxAggregate
+}
+
+type UsersCountAggregate {
+  id: Int!
+  email: Int!
+  password: Int!
+  first_name: Int!
+  last_name: Int!
+  gender: Int!
+  created_at: Int!
+  updated_at: Int!
+  email_verified: Int!
+  last_login: Int!
+  avatar: Int!
+  phone_number: Int!
+  reset_token: Int!
+  is_active: Int!
+  reset_token_expiry: Int!
+  city: Int!
+  state: Int!
+  country: Int!
+  _all: Int!
+}
+
+type UsersMinAggregate {
+  id: String
+  email: String
+  password: String
+  first_name: String
+  last_name: String
+  gender: gender
+  created_at: DateTime
+  updated_at: DateTime
+  email_verified: Boolean
+  last_login: DateTime
+  avatar: String
+  phone_number: String
+  reset_token: String
+  is_active: Boolean
+  reset_token_expiry: DateTime
+  city: String
+  state: String
+  country: String
+}
+
+type UsersMaxAggregate {
+  id: String
+  email: String
+  password: String
+  first_name: String
+  last_name: String
+  gender: gender
+  created_at: DateTime
+  updated_at: DateTime
+  email_verified: Boolean
+  last_login: DateTime
+  avatar: String
+  phone_number: String
+  reset_token: String
+  is_active: Boolean
+  reset_token_expiry: DateTime
+  city: String
+  state: String
+  country: String
+}
+
+type AggregateUsers {
+  _count: UsersCountAggregate
+  _min: UsersMinAggregate
+  _max: UsersMaxAggregate
+}
+
+type UniqueModulesResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: modules
+}
+
+type UniquePermissionsResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: permissions
+}
+
+type UniqueRolesResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: roles
+}
+
+type UniqueUsersResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: users
+}
+
+type ModulesResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: [modules!]
+}
+
+type PermissionsResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: [permissions!]
+}
+
+type RolesResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: [roles!]
+}
+
+type UsersResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: [users!]
+}
+
+type AggregateModulesResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: AggregateModules
+}
+
+type AggregatePermissionsResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: AggregatePermissions
+}
+
+type AggregateRolesResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: AggregateRoles
+}
+
+type AggregateUsersResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: AggregateUsers
+}
+
+type CrudManyOutput {
+  count: Float!
+}
+
+type CreateManyOutputResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: CrudManyOutput
+}
+
+type SendEmailResponse {
+  statusCode: Float!
+  status: String!
+  message: String!
+}
+
+type SendSmsResponseDto {
+  sid: String!
+  status: String!
+}
+
+type SendSmsResponse {
+  statusCode: Int
+  status: String!
+  message: String
+  error: String
+  data: SendSmsResponseDto
+}
+
+type Query {
+  healthCheck: String!
+  roles_by_pk(where: rolesWhereUniqueInput!): UniqueRolesResponse!
+  roles_aggregate(where: rolesWhereInput, orderBy: [rolesOrderByWithRelationInput!], cursor: rolesWhereUniqueInput, take: Int, skip: Int): AggregateRolesResponse!
+  roles(where: rolesWhereInput, orderBy: [rolesOrderByWithRelationInput!], cursor: rolesWhereUniqueInput, take: Int, skip: Int, distinct: [RolesScalarFieldEnum!]): RolesResponse!
+  permissions_by_pk(where: permissionsWhereUniqueInput!): UniquePermissionsResponse!
+  permissions_aggregate(where: permissionsWhereInput, orderBy: [permissionsOrderByWithRelationInput!], cursor: permissionsWhereUniqueInput, take: Int, skip: Int): AggregatePermissionsResponse!
+  permissions(where: permissionsWhereInput, orderBy: [permissionsOrderByWithRelationInput!], cursor: permissionsWhereUniqueInput, take: Int, skip: Int, distinct: [PermissionsScalarFieldEnum!]): PermissionsResponse!
+  modules_by_pk(where: modulesWhereUniqueInput!): UniqueModulesResponse!
+  modules_aggregate(where: modulesWhereInput, orderBy: [modulesOrderByWithRelationInput!], cursor: modulesWhereUniqueInput, take: Int, skip: Int): AggregateModulesResponse!
+  modules(where: modulesWhereInput, orderBy: [modulesOrderByWithRelationInput!], cursor: modulesWhereUniqueInput, take: Int, skip: Int, distinct: [ModulesScalarFieldEnum!]): ModulesResponse!
+  users_by_pk(where: usersWhereUniqueInput!): UniqueUsersResponse!
+  users_aggregate(where: usersWhereInput, orderBy: [usersOrderByWithRelationInput!], cursor: usersWhereUniqueInput, take: Int, skip: Int): AggregateUsersResponse!
+  users(where: usersWhereInput, orderBy: [usersOrderByWithRelationInput!], cursor: usersWhereUniqueInput, take: Int, skip: Int, distinct: [UsersScalarFieldEnum!]): UsersResponse!
+  hello: String!
+}
+
+input rolesWhereUniqueInput {
+  id: Int
+  name: String
+  AND: [rolesWhereInput!]
+  OR: [rolesWhereInput!]
+  NOT: [rolesWhereInput!]
+  description: StringNullableFilter
+  is_active: BoolNullableFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+  role_permissions: Role_permissionsListRelationFilter
+  user_roles: User_rolesListRelationFilter
+}
+
+input rolesWhereInput {
+  AND: [rolesWhereInput!]
+  OR: [rolesWhereInput!]
+  NOT: [rolesWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  description: StringNullableFilter
+  is_active: BoolNullableFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+  role_permissions: Role_permissionsListRelationFilter
+  user_roles: User_rolesListRelationFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input BoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+input NestedBoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeNullableFilter
+}
+
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeNullableFilter
+}
+
+input Role_permissionsListRelationFilter {
+  every: role_permissionsWhereInput
+  some: role_permissionsWhereInput
+  none: role_permissionsWhereInput
+}
+
+input role_permissionsWhereInput {
+  AND: [role_permissionsWhereInput!]
+  OR: [role_permissionsWhereInput!]
+  NOT: [role_permissionsWhereInput!]
+  id: IntFilter
+  role_id: IntFilter
+  permission_id: IntFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+  permissions: PermissionsRelationFilter
+  roles: RolesRelationFilter
+}
+
+input PermissionsRelationFilter {
+  is: permissionsWhereInput
+  isNot: permissionsWhereInput
+}
+
+input permissionsWhereInput {
+  AND: [permissionsWhereInput!]
+  OR: [permissionsWhereInput!]
+  NOT: [permissionsWhereInput!]
+  id: IntFilter
+  module_id: IntFilter
+  name: StringFilter
+  description: StringNullableFilter
+  is_enabled: BoolNullableFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+  modules: ModulesRelationFilter
+  role_permissions: Role_permissionsListRelationFilter
+  user_permissions: User_permissionsListRelationFilter
+}
+
+input ModulesRelationFilter {
+  is: modulesWhereInput
+  isNot: modulesWhereInput
+}
+
+input modulesWhereInput {
+  AND: [modulesWhereInput!]
+  OR: [modulesWhereInput!]
+  NOT: [modulesWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  description: StringNullableFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+  permissions: PermissionsListRelationFilter
+}
+
+input PermissionsListRelationFilter {
+  every: permissionsWhereInput
+  some: permissionsWhereInput
+  none: permissionsWhereInput
+}
+
+input User_permissionsListRelationFilter {
+  every: user_permissionsWhereInput
+  some: user_permissionsWhereInput
+  none: user_permissionsWhereInput
+}
+
+input user_permissionsWhereInput {
+  AND: [user_permissionsWhereInput!]
+  OR: [user_permissionsWhereInput!]
+  NOT: [user_permissionsWhereInput!]
+  id: IntFilter
+  user_id: UuidFilter
+  permission_id: IntFilter
+  granted: BoolFilter
+  granted_at: DateTimeNullableFilter
+  revoked_at: DateTimeNullableFilter
+  permissions: PermissionsRelationFilter
+  users: UsersRelationFilter
+}
+
+input UuidFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  mode: QueryMode
+  not: NestedUuidFilter
+}
+
+input NestedUuidFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  not: NestedUuidFilter
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input UsersRelationFilter {
+  is: usersWhereInput
+  isNot: usersWhereInput
+}
+
+input usersWhereInput {
+  AND: [usersWhereInput!]
+  OR: [usersWhereInput!]
+  NOT: [usersWhereInput!]
+  id: UuidFilter
+  email: StringNullableFilter
+  password: StringNullableFilter
+  first_name: StringNullableFilter
+  last_name: StringNullableFilter
+  gender: EnumgenderNullableFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+  email_verified: BoolNullableFilter
+  last_login: DateTimeNullableFilter
+  avatar: StringNullableFilter
+  phone_number: StringNullableFilter
+  reset_token: StringNullableFilter
+  is_active: BoolNullableFilter
+  reset_token_expiry: DateTimeNullableFilter
+  city: StringNullableFilter
+  state: StringNullableFilter
+  country: StringNullableFilter
+  oauth_identities: Oauth_identitiesListRelationFilter
+  user_otps: User_otpsNullableRelationFilter
+  user_permissions: User_permissionsListRelationFilter
+  user_roles: User_rolesListRelationFilter
+}
+
+input EnumgenderNullableFilter {
+  equals: gender
+  in: [gender!]
+  notIn: [gender!]
+  not: NestedEnumgenderNullableFilter
+}
+
+input NestedEnumgenderNullableFilter {
+  equals: gender
+  in: [gender!]
+  notIn: [gender!]
+  not: NestedEnumgenderNullableFilter
+}
+
+input Oauth_identitiesListRelationFilter {
+  every: oauth_identitiesWhereInput
+  some: oauth_identitiesWhereInput
+  none: oauth_identitiesWhereInput
+}
+
+input oauth_identitiesWhereInput {
+  AND: [oauth_identitiesWhereInput!]
+  OR: [oauth_identitiesWhereInput!]
+  NOT: [oauth_identitiesWhereInput!]
+  id: IntFilter
+  user_id: UuidFilter
+  provider_name: EnumprovidersFilter
+  provider_id: StringFilter
+  expires_at: DateTimeNullableFilter
+  users: UsersRelationFilter
+}
+
+input EnumprovidersFilter {
+  equals: providers
+  in: [providers!]
+  notIn: [providers!]
+  not: NestedEnumprovidersFilter
+}
+
+input NestedEnumprovidersFilter {
+  equals: providers
+  in: [providers!]
+  notIn: [providers!]
+  not: NestedEnumprovidersFilter
+}
+
+input User_otpsNullableRelationFilter {
+  is: user_otpsWhereInput
+  isNot: user_otpsWhereInput
+}
+
+input user_otpsWhereInput {
+  AND: [user_otpsWhereInput!]
+  OR: [user_otpsWhereInput!]
+  NOT: [user_otpsWhereInput!]
+  id: UuidFilter
+  user_id: UuidFilter
+  otp_value: StringFilter
+  count: IntNullableFilter
+  expires_at: DateTimeNullableFilter
+  created_at: DateTimeNullableFilter
+  is_used: BoolNullableFilter
+  purpose: StringNullableFilter
+  users: UsersRelationFilter
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input User_rolesListRelationFilter {
+  every: user_rolesWhereInput
+  some: user_rolesWhereInput
+  none: user_rolesWhereInput
+}
+
+input user_rolesWhereInput {
+  AND: [user_rolesWhereInput!]
+  OR: [user_rolesWhereInput!]
+  NOT: [user_rolesWhereInput!]
+  id: IntFilter
+  user_id: UuidFilter
+  role_id: IntFilter
+  roles: RolesRelationFilter
+  users: UsersRelationFilter
+}
+
+input RolesRelationFilter {
+  is: rolesWhereInput
+  isNot: rolesWhereInput
+}
+
+input rolesOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  description: SortOrderInput
+  is_active: SortOrderInput
+  created_at: SortOrderInput
+  updated_at: SortOrderInput
+  role_permissions: role_permissionsOrderByRelationAggregateInput
+  user_roles: user_rolesOrderByRelationAggregateInput
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input SortOrderInput {
+  sort: SortOrder!
+  nulls: NullsOrder
+}
+
+enum NullsOrder {
+  first
+  last
+}
+
+input role_permissionsOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input user_rolesOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+enum RolesScalarFieldEnum {
+  id
+  name
+  description
+  is_active
+  created_at
+  updated_at
+}
+
+input permissionsWhereUniqueInput {
+  id: Int
+  module_id_name: permissionsModule_idNameCompoundUniqueInput
+  AND: [permissionsWhereInput!]
+  OR: [permissionsWhereInput!]
+  NOT: [permissionsWhereInput!]
+  module_id: IntFilter
+  name: StringFilter
+  description: StringNullableFilter
+  is_enabled: BoolNullableFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+  modules: ModulesRelationFilter
+  role_permissions: Role_permissionsListRelationFilter
+  user_permissions: User_permissionsListRelationFilter
+}
+
+input permissionsModule_idNameCompoundUniqueInput {
+  module_id: Int!
+  name: String!
+}
+
+input permissionsOrderByWithRelationInput {
+  id: SortOrder
+  module_id: SortOrder
+  name: SortOrder
+  description: SortOrderInput
+  is_enabled: SortOrderInput
+  created_at: SortOrderInput
+  updated_at: SortOrderInput
+  modules: modulesOrderByWithRelationInput
+  role_permissions: role_permissionsOrderByRelationAggregateInput
+  user_permissions: user_permissionsOrderByRelationAggregateInput
+}
+
+input modulesOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  description: SortOrderInput
+  created_at: SortOrderInput
+  updated_at: SortOrderInput
+  permissions: permissionsOrderByRelationAggregateInput
+}
+
+input permissionsOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input user_permissionsOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+enum PermissionsScalarFieldEnum {
+  id
+  module_id
+  name
+  description
+  is_enabled
+  created_at
+  updated_at
+}
+
+input modulesWhereUniqueInput {
+  id: Int
+  name: String
+  AND: [modulesWhereInput!]
+  OR: [modulesWhereInput!]
+  NOT: [modulesWhereInput!]
+  description: StringNullableFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+  permissions: PermissionsListRelationFilter
+}
+
+enum ModulesScalarFieldEnum {
+  id
+  name
+  description
+  created_at
+  updated_at
+}
+
+input usersWhereUniqueInput {
+  id: String
+  email: String
+  phone_number: String
+  AND: [usersWhereInput!]
+  OR: [usersWhereInput!]
+  NOT: [usersWhereInput!]
+  password: StringNullableFilter
+  first_name: StringNullableFilter
+  last_name: StringNullableFilter
+  gender: EnumgenderNullableFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+  email_verified: BoolNullableFilter
+  last_login: DateTimeNullableFilter
+  avatar: StringNullableFilter
+  reset_token: StringNullableFilter
+  is_active: BoolNullableFilter
+  reset_token_expiry: DateTimeNullableFilter
+  city: StringNullableFilter
+  state: StringNullableFilter
+  country: StringNullableFilter
+  oauth_identities: Oauth_identitiesListRelationFilter
+  user_otps: User_otpsNullableRelationFilter
+  user_permissions: User_permissionsListRelationFilter
+  user_roles: User_rolesListRelationFilter
+}
+
+input usersOrderByWithRelationInput {
+  id: SortOrder
+  email: SortOrderInput
+  password: SortOrderInput
+  first_name: SortOrderInput
+  last_name: SortOrderInput
+  gender: SortOrderInput
+  created_at: SortOrderInput
+  updated_at: SortOrderInput
+  email_verified: SortOrderInput
+  last_login: SortOrderInput
+  avatar: SortOrderInput
+  phone_number: SortOrderInput
+  reset_token: SortOrderInput
+  is_active: SortOrderInput
+  reset_token_expiry: SortOrderInput
+  city: SortOrderInput
+  state: SortOrderInput
+  country: SortOrderInput
+  oauth_identities: oauth_identitiesOrderByRelationAggregateInput
+  user_otps: user_otpsOrderByWithRelationInput
+  user_permissions: user_permissionsOrderByRelationAggregateInput
+  user_roles: user_rolesOrderByRelationAggregateInput
+}
+
+input oauth_identitiesOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input user_otpsOrderByWithRelationInput {
+  id: SortOrder
+  user_id: SortOrder
+  otp_value: SortOrder
+  count: SortOrderInput
+  expires_at: SortOrderInput
+  created_at: SortOrderInput
+  is_used: SortOrderInput
+  purpose: SortOrderInput
+  users: usersOrderByWithRelationInput
+}
+
+enum UsersScalarFieldEnum {
+  id
+  email
+  password
+  first_name
+  last_name
+  gender
+  created_at
+  updated_at
+  email_verified
+  last_login
+  avatar
+  phone_number
+  reset_token
+  is_active
+  reset_token_expiry
+  city
+  state
+  country
+}
+
+type Mutation {
+  authenticateUser(authData: AuthInput!): AuthResponse!
+  registerUser(authData: AuthInput!): AuthResponse!
+  renewAccessToken: RenewTokenResponse!
+  initiatePasswordReset(email: String!): AuthResponse!
+  completePasswordReset(newPassword: String!): AuthResponse!
+  sendVerificationOtp(phone_no: String!): AuthResponse!
+  authenticateUserByPhoneNumberAndOtp(data: authPhoneDto!): AuthPhoneResponse!
+  validateOtp(data: validateOtpDto!): AuthResponse!
+  verifyTokenOfSocialAuth(provider: String!, socialAuthInput: SocialAuthInput!): AuthResponse!
+  insert_roles_one(data: rolesCreateInput!): UniqueRolesResponse!
+  insert_roles(data: [rolesCreateManyInput!]!, skipDuplicates: Boolean): CreateManyOutputResponse!
+  update_roles(data: rolesUpdateInput!, where: rolesWhereUniqueInput!): UniqueRolesResponse!
+  update_roles_by_pk(data: rolesUpdateInput!, where: rolesWhereUniqueInput!): UniqueRolesResponse!
+  update_many_roles(data: rolesUpdateManyMutationInput!, where: rolesWhereInput): CreateManyOutputResponse!
+  delete_roles(where: rolesWhereInput): CreateManyOutputResponse!
+  delete_roles_by_pk(where: rolesWhereUniqueInput!): UniqueRolesResponse!
+  insert_permissions_one(data: permissionsCreateInput!): UniquePermissionsResponse!
+  insert_permissions(data: [permissionsCreateManyInput!]!, skipDuplicates: Boolean): CreateManyOutputResponse!
+  update_permissions(data: permissionsUpdateInput!, where: permissionsWhereUniqueInput!): UniquePermissionsResponse!
+  update_permissions_by_pk(data: permissionsUpdateInput!, where: permissionsWhereUniqueInput!): UniquePermissionsResponse!
+  update_many_permissions(data: permissionsUpdateManyMutationInput!, where: permissionsWhereInput): CreateManyOutputResponse!
+  delete_permissions(where: permissionsWhereInput): CreateManyOutputResponse!
+  delete_permissions_by_pk(where: permissionsWhereUniqueInput!): UniquePermissionsResponse!
+  insert_modules_one(data: modulesCreateInput!): UniqueModulesResponse!
+  insert_modules(data: [modulesCreateManyInput!]!, skipDuplicates: Boolean): CreateManyOutputResponse!
+  update_modules_by_pk(data: modulesUpdateInput!, where: modulesWhereUniqueInput!): UniqueModulesResponse!
+  update_many_modules(data: modulesUpdateManyMutationInput!, where: modulesWhereInput): CreateManyOutputResponse!
+  delete_modules(where: modulesWhereInput): CreateManyOutputResponse!
+  delete_modules_by_pk(where: modulesWhereUniqueInput!): UniqueModulesResponse!
+  insert_users_one(data: usersCreateInput): UniqueUsersResponse!
+  insert_users(data: [usersCreateManyInput!]!, skipDuplicates: Boolean): CreateManyOutputResponse!
+  update_users(data: usersUpdateInput!, where: usersWhereUniqueInput!): UniqueUsersResponse!
+  update_users_by_pk(data: usersUpdateInput!, where: usersWhereUniqueInput!): UniqueUsersResponse!
+  update_many_users(data: usersUpdateManyMutationInput!, where: usersWhereInput): CreateManyOutputResponse!
+  delete_users(where: usersWhereInput): CreateManyOutputResponse!
+  delete_users_by_pk(where: usersWhereUniqueInput!): UniqueUsersResponse!
+  insert_users_permissions(data: [user_permissionsCreateManyInput!]!, skipDuplicates: Boolean): CreateManyOutputResponse!
+  update_many_users_permissions(data: user_permissionsUpdateManyMutationInput!, where: user_permissionsWhereInput): CreateManyOutputResponse!
+  delete_users_permissions(where: user_permissionsWhereInput): CreateManyOutputResponse!
+  insert_roles_permissions(data: [role_permissionsCreateManyInput!]!, skipDuplicates: Boolean): CreateManyOutputResponse!
+  update_many_roles_permissions(data: role_permissionsUpdateManyMutationInput!, where: role_permissionsWhereInput): CreateManyOutputResponse!
+  delete_roles_permissions(where: role_permissionsWhereInput): CreateManyOutputResponse!
+  insert_users_roles(data: [user_rolesCreateManyInput!]!, skipDuplicates: Boolean): CreateManyOutputResponse!
+  update_many_users_roles(data: user_rolesUpdateManyMutationInput!, where: user_rolesWhereInput): CreateManyOutputResponse!
+  delete_users_roles(where: user_rolesWhereInput): CreateManyOutputResponse!
+  sendNotification(notification: NotificationDto!): ApiResponse!
+  registerMobileDevice(data: RegisterDeviceDto!): RegisterResponse!
+  sendSms(data: SmsInputDto!): SendSmsResponse!
+  sendEmail(input: SendEmailDto!): SendEmailResponse!
+}
+
+input AuthInput {
+  email: String!
+  password: String!
+  role: Float!
+}
+
+input authPhoneDto {
+  phone_number: String!
+  role: Float
+}
+
+input validateOtpDto {
+  phone_no: String!
+  otp: String!
+}
+
+input SocialAuthInput {
+  email: String!
+  name: String!
+  image_url: String!
+  token: String!
+}
+
+input rolesCreateInput {
+  name: String!
+  description: String
+  is_active: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+  role_permissions: role_permissionsCreateNestedManyWithoutRolesInput
+  user_roles: user_rolesCreateNestedManyWithoutRolesInput
+}
+
+input role_permissionsCreateNestedManyWithoutRolesInput {
+  create: [role_permissionsCreateWithoutRolesInput!]
+  connectOrCreate: [role_permissionsCreateOrConnectWithoutRolesInput!]
+  createMany: role_permissionsCreateManyRolesInputEnvelope
+  connect: [role_permissionsWhereUniqueInput!]
+}
+
+input role_permissionsCreateWithoutRolesInput {
+  id: Int
+  created_at: DateTime
+  updated_at: DateTime
+  permissions: permissionsCreateNestedOneWithoutRole_permissionsInput!
+}
+
+input permissionsCreateNestedOneWithoutRole_permissionsInput {
+  create: permissionsCreateWithoutRole_permissionsInput
+  connectOrCreate: permissionsCreateOrConnectWithoutRole_permissionsInput
+  connect: permissionsWhereUniqueInput
+}
+
+input permissionsCreateWithoutRole_permissionsInput {
+  name: String!
+  description: String
+  is_enabled: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+  modules: modulesCreateNestedOneWithoutPermissionsInput!
+  user_permissions: user_permissionsCreateNestedManyWithoutPermissionsInput
+}
+
+input modulesCreateNestedOneWithoutPermissionsInput {
+  create: modulesCreateWithoutPermissionsInput
+  connectOrCreate: modulesCreateOrConnectWithoutPermissionsInput
+  connect: modulesWhereUniqueInput
+}
+
+input modulesCreateWithoutPermissionsInput {
+  name: String!
+  description: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input modulesCreateOrConnectWithoutPermissionsInput {
+  where: modulesWhereUniqueInput!
+  create: modulesCreateWithoutPermissionsInput!
+}
+
+input user_permissionsCreateNestedManyWithoutPermissionsInput {
+  create: [user_permissionsCreateWithoutPermissionsInput!]
+  connectOrCreate: [user_permissionsCreateOrConnectWithoutPermissionsInput!]
+  createMany: user_permissionsCreateManyPermissionsInputEnvelope
+  connect: [user_permissionsWhereUniqueInput!]
+}
+
+input user_permissionsCreateWithoutPermissionsInput {
+  id: Int
+  granted: Boolean
+  granted_at: DateTime
+  revoked_at: DateTime
+  users: usersCreateNestedOneWithoutUser_permissionsInput!
+}
+
+input usersCreateNestedOneWithoutUser_permissionsInput {
+  create: usersCreateWithoutUser_permissionsInput
+  connectOrCreate: usersCreateOrConnectWithoutUser_permissionsInput
+  connect: usersWhereUniqueInput
+}
+
+input usersCreateWithoutUser_permissionsInput {
+  id: String
+  email: String
+  password: String
+  first_name: String
+  last_name: String
+  gender: gender
+  created_at: DateTime
+  updated_at: DateTime
+  email_verified: Boolean
+  last_login: DateTime
+  avatar: String
+  phone_number: String
+  reset_token: String
+  is_active: Boolean
+  reset_token_expiry: DateTime
+  city: String
+  state: String
+  country: String
+  oauth_identities: oauth_identitiesCreateNestedManyWithoutUsersInput
+  user_otps: user_otpsCreateNestedOneWithoutUsersInput
+  user_roles: user_rolesCreateNestedManyWithoutUsersInput
+}
+
+input oauth_identitiesCreateNestedManyWithoutUsersInput {
+  create: [oauth_identitiesCreateWithoutUsersInput!]
+  connectOrCreate: [oauth_identitiesCreateOrConnectWithoutUsersInput!]
+  createMany: oauth_identitiesCreateManyUsersInputEnvelope
+  connect: [oauth_identitiesWhereUniqueInput!]
+}
+
+input oauth_identitiesCreateWithoutUsersInput {
+  provider_name: providers!
+  provider_id: String!
+  expires_at: DateTime
+}
+
+input oauth_identitiesCreateOrConnectWithoutUsersInput {
+  where: oauth_identitiesWhereUniqueInput!
+  create: oauth_identitiesCreateWithoutUsersInput!
+}
+
+input oauth_identitiesWhereUniqueInput {
+  id: Int
+  provider_name_provider_id: oauth_identitiesProvider_nameProvider_idCompoundUniqueInput
+  user_id_provider_name: oauth_identitiesUser_idProvider_nameCompoundUniqueInput
+  AND: [oauth_identitiesWhereInput!]
+  OR: [oauth_identitiesWhereInput!]
+  NOT: [oauth_identitiesWhereInput!]
+  user_id: UuidFilter
+  provider_name: EnumprovidersFilter
+  provider_id: StringFilter
+  expires_at: DateTimeNullableFilter
+  users: UsersRelationFilter
+}
+
+input oauth_identitiesProvider_nameProvider_idCompoundUniqueInput {
+  provider_name: providers!
+  provider_id: String!
+}
+
+input oauth_identitiesUser_idProvider_nameCompoundUniqueInput {
+  user_id: String!
+  provider_name: providers!
+}
+
+input oauth_identitiesCreateManyUsersInputEnvelope {
+  data: [oauth_identitiesCreateManyUsersInput!]!
+  skipDuplicates: Boolean
+}
+
+input oauth_identitiesCreateManyUsersInput {
+  id: Int
+  provider_name: providers!
+  provider_id: String!
+  expires_at: DateTime
+}
+
+input user_otpsCreateNestedOneWithoutUsersInput {
+  create: user_otpsCreateWithoutUsersInput
+  connectOrCreate: user_otpsCreateOrConnectWithoutUsersInput
+  connect: user_otpsWhereUniqueInput
+}
+
+input user_otpsCreateWithoutUsersInput {
+  id: String
+  otp_value: String!
+  count: Int
+  expires_at: DateTime
+  created_at: DateTime
+  is_used: Boolean
+  purpose: String
+}
+
+input user_otpsCreateOrConnectWithoutUsersInput {
+  where: user_otpsWhereUniqueInput!
+  create: user_otpsCreateWithoutUsersInput!
+}
+
+input user_otpsWhereUniqueInput {
+  id: String
+  user_id: String
+  AND: [user_otpsWhereInput!]
+  OR: [user_otpsWhereInput!]
+  NOT: [user_otpsWhereInput!]
+  otp_value: StringFilter
+  count: IntNullableFilter
+  expires_at: DateTimeNullableFilter
+  created_at: DateTimeNullableFilter
+  is_used: BoolNullableFilter
+  purpose: StringNullableFilter
+  users: UsersRelationFilter
+}
+
+input user_rolesCreateNestedManyWithoutUsersInput {
+  create: [user_rolesCreateWithoutUsersInput!]
+  connectOrCreate: [user_rolesCreateOrConnectWithoutUsersInput!]
+  createMany: user_rolesCreateManyUsersInputEnvelope
+  connect: [user_rolesWhereUniqueInput!]
+}
+
+input user_rolesCreateWithoutUsersInput {
+  id: Int
+  roles: rolesCreateNestedOneWithoutUser_rolesInput!
+}
+
+input rolesCreateNestedOneWithoutUser_rolesInput {
+  create: rolesCreateWithoutUser_rolesInput
+  connectOrCreate: rolesCreateOrConnectWithoutUser_rolesInput
+  connect: rolesWhereUniqueInput
+}
+
+input rolesCreateWithoutUser_rolesInput {
+  name: String!
+  description: String
+  is_active: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+  role_permissions: role_permissionsCreateNestedManyWithoutRolesInput
+}
+
+input rolesCreateOrConnectWithoutUser_rolesInput {
+  where: rolesWhereUniqueInput!
+  create: rolesCreateWithoutUser_rolesInput!
+}
+
+input user_rolesCreateOrConnectWithoutUsersInput {
+  where: user_rolesWhereUniqueInput!
+  create: user_rolesCreateWithoutUsersInput!
+}
+
+input user_rolesWhereUniqueInput {
+  id_user_id_role_id: user_rolesIdUser_idRole_idCompoundUniqueInput
+  AND: [user_rolesWhereInput!]
+  OR: [user_rolesWhereInput!]
+  NOT: [user_rolesWhereInput!]
+  id: IntFilter
+  user_id: UuidFilter
+  role_id: IntFilter
+  roles: RolesRelationFilter
+  users: UsersRelationFilter
+}
+
+input user_rolesIdUser_idRole_idCompoundUniqueInput {
+  id: Int!
+  user_id: String!
+  role_id: Int!
+}
+
+input user_rolesCreateManyUsersInputEnvelope {
+  data: [user_rolesCreateManyUsersInput!]!
+  skipDuplicates: Boolean
+}
+
+input user_rolesCreateManyUsersInput {
+  id: Int
+  role_id: Int!
+}
+
+input usersCreateOrConnectWithoutUser_permissionsInput {
+  where: usersWhereUniqueInput!
+  create: usersCreateWithoutUser_permissionsInput!
+}
+
+input user_permissionsCreateOrConnectWithoutPermissionsInput {
+  where: user_permissionsWhereUniqueInput!
+  create: user_permissionsCreateWithoutPermissionsInput!
+}
+
+input user_permissionsWhereUniqueInput {
+  id_user_id_permission_id: user_permissionsIdUser_idPermission_idCompoundUniqueInput
+  AND: [user_permissionsWhereInput!]
+  OR: [user_permissionsWhereInput!]
+  NOT: [user_permissionsWhereInput!]
+  id: IntFilter
+  user_id: UuidFilter
+  permission_id: IntFilter
+  granted: BoolFilter
+  granted_at: DateTimeNullableFilter
+  revoked_at: DateTimeNullableFilter
+  permissions: PermissionsRelationFilter
+  users: UsersRelationFilter
+}
+
+input user_permissionsIdUser_idPermission_idCompoundUniqueInput {
+  id: Int!
+  user_id: String!
+  permission_id: Int!
+}
+
+input user_permissionsCreateManyPermissionsInputEnvelope {
+  data: [user_permissionsCreateManyPermissionsInput!]!
+  skipDuplicates: Boolean
+}
+
+input user_permissionsCreateManyPermissionsInput {
+  id: Int
+  user_id: String!
+  granted: Boolean
+  granted_at: DateTime
+  revoked_at: DateTime
+}
+
+input permissionsCreateOrConnectWithoutRole_permissionsInput {
+  where: permissionsWhereUniqueInput!
+  create: permissionsCreateWithoutRole_permissionsInput!
+}
+
+input role_permissionsCreateOrConnectWithoutRolesInput {
+  where: role_permissionsWhereUniqueInput!
+  create: role_permissionsCreateWithoutRolesInput!
+}
+
+input role_permissionsWhereUniqueInput {
+  id_role_id_permission_id: role_permissionsIdRole_idPermission_idCompoundUniqueInput
+  AND: [role_permissionsWhereInput!]
+  OR: [role_permissionsWhereInput!]
+  NOT: [role_permissionsWhereInput!]
+  id: IntFilter
+  role_id: IntFilter
+  permission_id: IntFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+  permissions: PermissionsRelationFilter
+  roles: RolesRelationFilter
+}
+
+input role_permissionsIdRole_idPermission_idCompoundUniqueInput {
+  id: Int!
+  role_id: Int!
+  permission_id: Int!
+}
+
+input role_permissionsCreateManyRolesInputEnvelope {
+  data: [role_permissionsCreateManyRolesInput!]!
+  skipDuplicates: Boolean
+}
+
+input role_permissionsCreateManyRolesInput {
+  id: Int
+  permission_id: Int!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input user_rolesCreateNestedManyWithoutRolesInput {
+  create: [user_rolesCreateWithoutRolesInput!]
+  connectOrCreate: [user_rolesCreateOrConnectWithoutRolesInput!]
+  createMany: user_rolesCreateManyRolesInputEnvelope
+  connect: [user_rolesWhereUniqueInput!]
+}
+
+input user_rolesCreateWithoutRolesInput {
+  id: Int
+  users: usersCreateNestedOneWithoutUser_rolesInput!
+}
+
+input usersCreateNestedOneWithoutUser_rolesInput {
+  create: usersCreateWithoutUser_rolesInput
+  connectOrCreate: usersCreateOrConnectWithoutUser_rolesInput
+  connect: usersWhereUniqueInput
+}
+
+input usersCreateWithoutUser_rolesInput {
+  id: String
+  email: String
+  password: String
+  first_name: String
+  last_name: String
+  gender: gender
+  created_at: DateTime
+  updated_at: DateTime
+  email_verified: Boolean
+  last_login: DateTime
+  avatar: String
+  phone_number: String
+  reset_token: String
+  is_active: Boolean
+  reset_token_expiry: DateTime
+  city: String
+  state: String
+  country: String
+  oauth_identities: oauth_identitiesCreateNestedManyWithoutUsersInput
+  user_otps: user_otpsCreateNestedOneWithoutUsersInput
+  user_permissions: user_permissionsCreateNestedManyWithoutUsersInput
+}
+
+input user_permissionsCreateNestedManyWithoutUsersInput {
+  create: [user_permissionsCreateWithoutUsersInput!]
+  connectOrCreate: [user_permissionsCreateOrConnectWithoutUsersInput!]
+  createMany: user_permissionsCreateManyUsersInputEnvelope
+  connect: [user_permissionsWhereUniqueInput!]
+}
+
+input user_permissionsCreateWithoutUsersInput {
+  id: Int
+  granted: Boolean
+  granted_at: DateTime
+  revoked_at: DateTime
+  permissions: permissionsCreateNestedOneWithoutUser_permissionsInput!
+}
+
+input permissionsCreateNestedOneWithoutUser_permissionsInput {
+  create: permissionsCreateWithoutUser_permissionsInput
+  connectOrCreate: permissionsCreateOrConnectWithoutUser_permissionsInput
+  connect: permissionsWhereUniqueInput
+}
+
+input permissionsCreateWithoutUser_permissionsInput {
+  name: String!
+  description: String
+  is_enabled: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+  modules: modulesCreateNestedOneWithoutPermissionsInput!
+  role_permissions: role_permissionsCreateNestedManyWithoutPermissionsInput
+}
+
+input role_permissionsCreateNestedManyWithoutPermissionsInput {
+  create: [role_permissionsCreateWithoutPermissionsInput!]
+  connectOrCreate: [role_permissionsCreateOrConnectWithoutPermissionsInput!]
+  createMany: role_permissionsCreateManyPermissionsInputEnvelope
+  connect: [role_permissionsWhereUniqueInput!]
+}
+
+input role_permissionsCreateWithoutPermissionsInput {
+  id: Int
+  created_at: DateTime
+  updated_at: DateTime
+  roles: rolesCreateNestedOneWithoutRole_permissionsInput!
+}
+
+input rolesCreateNestedOneWithoutRole_permissionsInput {
+  create: rolesCreateWithoutRole_permissionsInput
+  connectOrCreate: rolesCreateOrConnectWithoutRole_permissionsInput
+  connect: rolesWhereUniqueInput
+}
+
+input rolesCreateWithoutRole_permissionsInput {
+  name: String!
+  description: String
+  is_active: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+  user_roles: user_rolesCreateNestedManyWithoutRolesInput
+}
+
+input rolesCreateOrConnectWithoutRole_permissionsInput {
+  where: rolesWhereUniqueInput!
+  create: rolesCreateWithoutRole_permissionsInput!
+}
+
+input role_permissionsCreateOrConnectWithoutPermissionsInput {
+  where: role_permissionsWhereUniqueInput!
+  create: role_permissionsCreateWithoutPermissionsInput!
+}
+
+input role_permissionsCreateManyPermissionsInputEnvelope {
+  data: [role_permissionsCreateManyPermissionsInput!]!
+  skipDuplicates: Boolean
+}
+
+input role_permissionsCreateManyPermissionsInput {
+  id: Int
+  role_id: Int!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input permissionsCreateOrConnectWithoutUser_permissionsInput {
+  where: permissionsWhereUniqueInput!
+  create: permissionsCreateWithoutUser_permissionsInput!
+}
+
+input user_permissionsCreateOrConnectWithoutUsersInput {
+  where: user_permissionsWhereUniqueInput!
+  create: user_permissionsCreateWithoutUsersInput!
+}
+
+input user_permissionsCreateManyUsersInputEnvelope {
+  data: [user_permissionsCreateManyUsersInput!]!
+  skipDuplicates: Boolean
+}
+
+input user_permissionsCreateManyUsersInput {
+  id: Int
+  permission_id: Int!
+  granted: Boolean
+  granted_at: DateTime
+  revoked_at: DateTime
+}
+
+input usersCreateOrConnectWithoutUser_rolesInput {
+  where: usersWhereUniqueInput!
+  create: usersCreateWithoutUser_rolesInput!
+}
+
+input user_rolesCreateOrConnectWithoutRolesInput {
+  where: user_rolesWhereUniqueInput!
+  create: user_rolesCreateWithoutRolesInput!
+}
+
+input user_rolesCreateManyRolesInputEnvelope {
+  data: [user_rolesCreateManyRolesInput!]!
+  skipDuplicates: Boolean
+}
+
+input user_rolesCreateManyRolesInput {
+  id: Int
+  user_id: String!
+}
+
+input rolesCreateManyInput {
+  id: Int
+  name: String!
+  description: String
+  is_active: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input rolesUpdateInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  is_active: NullableBoolFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  role_permissions: role_permissionsUpdateManyWithoutRolesNestedInput
+  user_roles: user_rolesUpdateManyWithoutRolesNestedInput
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+input NullableBoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input role_permissionsUpdateManyWithoutRolesNestedInput {
+  create: [role_permissionsCreateWithoutRolesInput!]
+  connectOrCreate: [role_permissionsCreateOrConnectWithoutRolesInput!]
+  upsert: [role_permissionsUpsertWithWhereUniqueWithoutRolesInput!]
+  createMany: role_permissionsCreateManyRolesInputEnvelope
+  set: [role_permissionsWhereUniqueInput!]
+  disconnect: [role_permissionsWhereUniqueInput!]
+  delete: [role_permissionsWhereUniqueInput!]
+  connect: [role_permissionsWhereUniqueInput!]
+  update: [role_permissionsUpdateWithWhereUniqueWithoutRolesInput!]
+  updateMany: [role_permissionsUpdateManyWithWhereWithoutRolesInput!]
+  deleteMany: [role_permissionsScalarWhereInput!]
+}
+
+input role_permissionsUpsertWithWhereUniqueWithoutRolesInput {
+  where: role_permissionsWhereUniqueInput!
+  update: role_permissionsUpdateWithoutRolesInput!
+  create: role_permissionsCreateWithoutRolesInput!
+}
+
+input role_permissionsUpdateWithoutRolesInput {
+  id: IntFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  permissions: permissionsUpdateOneRequiredWithoutRole_permissionsNestedInput
+}
+
+input IntFieldUpdateOperationsInput {
+  set: Int
+  increment: Int
+  decrement: Int
+  multiply: Int
+  divide: Int
+}
+
+input permissionsUpdateOneRequiredWithoutRole_permissionsNestedInput {
+  create: permissionsCreateWithoutRole_permissionsInput
+  connectOrCreate: permissionsCreateOrConnectWithoutRole_permissionsInput
+  upsert: permissionsUpsertWithoutRole_permissionsInput
+  connect: permissionsWhereUniqueInput
+  update: permissionsUpdateToOneWithWhereWithoutRole_permissionsInput
+}
+
+input permissionsUpsertWithoutRole_permissionsInput {
+  update: permissionsUpdateWithoutRole_permissionsInput!
+  create: permissionsCreateWithoutRole_permissionsInput!
+  where: permissionsWhereInput
+}
+
+input permissionsUpdateWithoutRole_permissionsInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  is_enabled: NullableBoolFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  modules: modulesUpdateOneRequiredWithoutPermissionsNestedInput
+  user_permissions: user_permissionsUpdateManyWithoutPermissionsNestedInput
+}
+
+input modulesUpdateOneRequiredWithoutPermissionsNestedInput {
+  create: modulesCreateWithoutPermissionsInput
+  connectOrCreate: modulesCreateOrConnectWithoutPermissionsInput
+  upsert: modulesUpsertWithoutPermissionsInput
+  connect: modulesWhereUniqueInput
+  update: modulesUpdateToOneWithWhereWithoutPermissionsInput
+}
+
+input modulesUpsertWithoutPermissionsInput {
+  update: modulesUpdateWithoutPermissionsInput!
+  create: modulesCreateWithoutPermissionsInput!
+  where: modulesWhereInput
+}
+
+input modulesUpdateWithoutPermissionsInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input modulesUpdateToOneWithWhereWithoutPermissionsInput {
+  where: modulesWhereInput
+  data: modulesUpdateWithoutPermissionsInput!
+}
+
+input user_permissionsUpdateManyWithoutPermissionsNestedInput {
+  create: [user_permissionsCreateWithoutPermissionsInput!]
+  connectOrCreate: [user_permissionsCreateOrConnectWithoutPermissionsInput!]
+  upsert: [user_permissionsUpsertWithWhereUniqueWithoutPermissionsInput!]
+  createMany: user_permissionsCreateManyPermissionsInputEnvelope
+  set: [user_permissionsWhereUniqueInput!]
+  disconnect: [user_permissionsWhereUniqueInput!]
+  delete: [user_permissionsWhereUniqueInput!]
+  connect: [user_permissionsWhereUniqueInput!]
+  update: [user_permissionsUpdateWithWhereUniqueWithoutPermissionsInput!]
+  updateMany: [user_permissionsUpdateManyWithWhereWithoutPermissionsInput!]
+  deleteMany: [user_permissionsScalarWhereInput!]
+}
+
+input user_permissionsUpsertWithWhereUniqueWithoutPermissionsInput {
+  where: user_permissionsWhereUniqueInput!
+  update: user_permissionsUpdateWithoutPermissionsInput!
+  create: user_permissionsCreateWithoutPermissionsInput!
+}
+
+input user_permissionsUpdateWithoutPermissionsInput {
+  id: IntFieldUpdateOperationsInput
+  granted: BoolFieldUpdateOperationsInput
+  granted_at: NullableDateTimeFieldUpdateOperationsInput
+  revoked_at: NullableDateTimeFieldUpdateOperationsInput
+  users: usersUpdateOneRequiredWithoutUser_permissionsNestedInput
+}
+
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input usersUpdateOneRequiredWithoutUser_permissionsNestedInput {
+  create: usersCreateWithoutUser_permissionsInput
+  connectOrCreate: usersCreateOrConnectWithoutUser_permissionsInput
+  upsert: usersUpsertWithoutUser_permissionsInput
+  connect: usersWhereUniqueInput
+  update: usersUpdateToOneWithWhereWithoutUser_permissionsInput
+}
+
+input usersUpsertWithoutUser_permissionsInput {
+  update: usersUpdateWithoutUser_permissionsInput!
+  create: usersCreateWithoutUser_permissionsInput!
+  where: usersWhereInput
+}
+
+input usersUpdateWithoutUser_permissionsInput {
+  id: StringFieldUpdateOperationsInput
+  email: NullableStringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  first_name: NullableStringFieldUpdateOperationsInput
+  last_name: NullableStringFieldUpdateOperationsInput
+  gender: NullableEnumgenderFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  email_verified: NullableBoolFieldUpdateOperationsInput
+  last_login: NullableDateTimeFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  phone_number: NullableStringFieldUpdateOperationsInput
+  reset_token: NullableStringFieldUpdateOperationsInput
+  is_active: NullableBoolFieldUpdateOperationsInput
+  reset_token_expiry: NullableDateTimeFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  state: NullableStringFieldUpdateOperationsInput
+  country: NullableStringFieldUpdateOperationsInput
+  oauth_identities: oauth_identitiesUpdateManyWithoutUsersNestedInput
+  user_otps: user_otpsUpdateOneWithoutUsersNestedInput
+  user_roles: user_rolesUpdateManyWithoutUsersNestedInput
+}
+
+input NullableEnumgenderFieldUpdateOperationsInput {
+  set: gender
+}
+
+input oauth_identitiesUpdateManyWithoutUsersNestedInput {
+  create: [oauth_identitiesCreateWithoutUsersInput!]
+  connectOrCreate: [oauth_identitiesCreateOrConnectWithoutUsersInput!]
+  upsert: [oauth_identitiesUpsertWithWhereUniqueWithoutUsersInput!]
+  createMany: oauth_identitiesCreateManyUsersInputEnvelope
+  set: [oauth_identitiesWhereUniqueInput!]
+  disconnect: [oauth_identitiesWhereUniqueInput!]
+  delete: [oauth_identitiesWhereUniqueInput!]
+  connect: [oauth_identitiesWhereUniqueInput!]
+  update: [oauth_identitiesUpdateWithWhereUniqueWithoutUsersInput!]
+  updateMany: [oauth_identitiesUpdateManyWithWhereWithoutUsersInput!]
+  deleteMany: [oauth_identitiesScalarWhereInput!]
+}
+
+input oauth_identitiesUpsertWithWhereUniqueWithoutUsersInput {
+  where: oauth_identitiesWhereUniqueInput!
+  update: oauth_identitiesUpdateWithoutUsersInput!
+  create: oauth_identitiesCreateWithoutUsersInput!
+}
+
+input oauth_identitiesUpdateWithoutUsersInput {
+  provider_name: EnumprovidersFieldUpdateOperationsInput
+  provider_id: StringFieldUpdateOperationsInput
+  expires_at: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input EnumprovidersFieldUpdateOperationsInput {
+  set: providers
+}
+
+input oauth_identitiesUpdateWithWhereUniqueWithoutUsersInput {
+  where: oauth_identitiesWhereUniqueInput!
+  data: oauth_identitiesUpdateWithoutUsersInput!
+}
+
+input oauth_identitiesUpdateManyWithWhereWithoutUsersInput {
+  where: oauth_identitiesScalarWhereInput!
+  data: oauth_identitiesUpdateManyMutationInput!
+}
+
+input oauth_identitiesScalarWhereInput {
+  AND: [oauth_identitiesScalarWhereInput!]
+  OR: [oauth_identitiesScalarWhereInput!]
+  NOT: [oauth_identitiesScalarWhereInput!]
+  id: IntFilter
+  user_id: UuidFilter
+  provider_name: EnumprovidersFilter
+  provider_id: StringFilter
+  expires_at: DateTimeNullableFilter
+}
+
+input oauth_identitiesUpdateManyMutationInput {
+  provider_name: EnumprovidersFieldUpdateOperationsInput
+  provider_id: StringFieldUpdateOperationsInput
+  expires_at: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input user_otpsUpdateOneWithoutUsersNestedInput {
+  create: user_otpsCreateWithoutUsersInput
+  connectOrCreate: user_otpsCreateOrConnectWithoutUsersInput
+  upsert: user_otpsUpsertWithoutUsersInput
+  disconnect: user_otpsWhereInput
+  delete: user_otpsWhereInput
+  connect: user_otpsWhereUniqueInput
+  update: user_otpsUpdateToOneWithWhereWithoutUsersInput
+}
+
+input user_otpsUpsertWithoutUsersInput {
+  update: user_otpsUpdateWithoutUsersInput!
+  create: user_otpsCreateWithoutUsersInput!
+  where: user_otpsWhereInput
+}
+
+input user_otpsUpdateWithoutUsersInput {
+  id: StringFieldUpdateOperationsInput
+  otp_value: StringFieldUpdateOperationsInput
+  count: NullableIntFieldUpdateOperationsInput
+  expires_at: NullableDateTimeFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  is_used: NullableBoolFieldUpdateOperationsInput
+  purpose: NullableStringFieldUpdateOperationsInput
+}
+
+input NullableIntFieldUpdateOperationsInput {
+  set: Int
+  increment: Int
+  decrement: Int
+  multiply: Int
+  divide: Int
+}
+
+input user_otpsUpdateToOneWithWhereWithoutUsersInput {
+  where: user_otpsWhereInput
+  data: user_otpsUpdateWithoutUsersInput!
+}
+
+input user_rolesUpdateManyWithoutUsersNestedInput {
+  create: [user_rolesCreateWithoutUsersInput!]
+  connectOrCreate: [user_rolesCreateOrConnectWithoutUsersInput!]
+  upsert: [user_rolesUpsertWithWhereUniqueWithoutUsersInput!]
+  createMany: user_rolesCreateManyUsersInputEnvelope
+  set: [user_rolesWhereUniqueInput!]
+  disconnect: [user_rolesWhereUniqueInput!]
+  delete: [user_rolesWhereUniqueInput!]
+  connect: [user_rolesWhereUniqueInput!]
+  update: [user_rolesUpdateWithWhereUniqueWithoutUsersInput!]
+  updateMany: [user_rolesUpdateManyWithWhereWithoutUsersInput!]
+  deleteMany: [user_rolesScalarWhereInput!]
+}
+
+input user_rolesUpsertWithWhereUniqueWithoutUsersInput {
+  where: user_rolesWhereUniqueInput!
+  update: user_rolesUpdateWithoutUsersInput!
+  create: user_rolesCreateWithoutUsersInput!
+}
+
+input user_rolesUpdateWithoutUsersInput {
+  id: IntFieldUpdateOperationsInput
+  roles: rolesUpdateOneRequiredWithoutUser_rolesNestedInput
+}
+
+input rolesUpdateOneRequiredWithoutUser_rolesNestedInput {
+  create: rolesCreateWithoutUser_rolesInput
+  connectOrCreate: rolesCreateOrConnectWithoutUser_rolesInput
+  upsert: rolesUpsertWithoutUser_rolesInput
+  connect: rolesWhereUniqueInput
+  update: rolesUpdateToOneWithWhereWithoutUser_rolesInput
+}
+
+input rolesUpsertWithoutUser_rolesInput {
+  update: rolesUpdateWithoutUser_rolesInput!
+  create: rolesCreateWithoutUser_rolesInput!
+  where: rolesWhereInput
+}
+
+input rolesUpdateWithoutUser_rolesInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  is_active: NullableBoolFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  role_permissions: role_permissionsUpdateManyWithoutRolesNestedInput
+}
+
+input rolesUpdateToOneWithWhereWithoutUser_rolesInput {
+  where: rolesWhereInput
+  data: rolesUpdateWithoutUser_rolesInput!
+}
+
+input user_rolesUpdateWithWhereUniqueWithoutUsersInput {
+  where: user_rolesWhereUniqueInput!
+  data: user_rolesUpdateWithoutUsersInput!
+}
+
+input user_rolesUpdateManyWithWhereWithoutUsersInput {
+  where: user_rolesScalarWhereInput!
+  data: user_rolesUpdateManyMutationInput!
+}
+
+input user_rolesScalarWhereInput {
+  AND: [user_rolesScalarWhereInput!]
+  OR: [user_rolesScalarWhereInput!]
+  NOT: [user_rolesScalarWhereInput!]
+  id: IntFilter
+  user_id: UuidFilter
+  role_id: IntFilter
+}
+
+input user_rolesUpdateManyMutationInput {
+  id: IntFieldUpdateOperationsInput
+}
+
+input usersUpdateToOneWithWhereWithoutUser_permissionsInput {
+  where: usersWhereInput
+  data: usersUpdateWithoutUser_permissionsInput!
+}
+
+input user_permissionsUpdateWithWhereUniqueWithoutPermissionsInput {
+  where: user_permissionsWhereUniqueInput!
+  data: user_permissionsUpdateWithoutPermissionsInput!
+}
+
+input user_permissionsUpdateManyWithWhereWithoutPermissionsInput {
+  where: user_permissionsScalarWhereInput!
+  data: user_permissionsUpdateManyMutationInput!
+}
+
+input user_permissionsScalarWhereInput {
+  AND: [user_permissionsScalarWhereInput!]
+  OR: [user_permissionsScalarWhereInput!]
+  NOT: [user_permissionsScalarWhereInput!]
+  id: IntFilter
+  user_id: UuidFilter
+  permission_id: IntFilter
+  granted: BoolFilter
+  granted_at: DateTimeNullableFilter
+  revoked_at: DateTimeNullableFilter
+}
+
+input user_permissionsUpdateManyMutationInput {
+  id: IntFieldUpdateOperationsInput
+  granted: BoolFieldUpdateOperationsInput
+  granted_at: NullableDateTimeFieldUpdateOperationsInput
+  revoked_at: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input permissionsUpdateToOneWithWhereWithoutRole_permissionsInput {
+  where: permissionsWhereInput
+  data: permissionsUpdateWithoutRole_permissionsInput!
+}
+
+input role_permissionsUpdateWithWhereUniqueWithoutRolesInput {
+  where: role_permissionsWhereUniqueInput!
+  data: role_permissionsUpdateWithoutRolesInput!
+}
+
+input role_permissionsUpdateManyWithWhereWithoutRolesInput {
+  where: role_permissionsScalarWhereInput!
+  data: role_permissionsUpdateManyMutationInput!
+}
+
+input role_permissionsScalarWhereInput {
+  AND: [role_permissionsScalarWhereInput!]
+  OR: [role_permissionsScalarWhereInput!]
+  NOT: [role_permissionsScalarWhereInput!]
+  id: IntFilter
+  role_id: IntFilter
+  permission_id: IntFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+}
+
+input role_permissionsUpdateManyMutationInput {
+  id: IntFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input user_rolesUpdateManyWithoutRolesNestedInput {
+  create: [user_rolesCreateWithoutRolesInput!]
+  connectOrCreate: [user_rolesCreateOrConnectWithoutRolesInput!]
+  upsert: [user_rolesUpsertWithWhereUniqueWithoutRolesInput!]
+  createMany: user_rolesCreateManyRolesInputEnvelope
+  set: [user_rolesWhereUniqueInput!]
+  disconnect: [user_rolesWhereUniqueInput!]
+  delete: [user_rolesWhereUniqueInput!]
+  connect: [user_rolesWhereUniqueInput!]
+  update: [user_rolesUpdateWithWhereUniqueWithoutRolesInput!]
+  updateMany: [user_rolesUpdateManyWithWhereWithoutRolesInput!]
+  deleteMany: [user_rolesScalarWhereInput!]
+}
+
+input user_rolesUpsertWithWhereUniqueWithoutRolesInput {
+  where: user_rolesWhereUniqueInput!
+  update: user_rolesUpdateWithoutRolesInput!
+  create: user_rolesCreateWithoutRolesInput!
+}
+
+input user_rolesUpdateWithoutRolesInput {
+  id: IntFieldUpdateOperationsInput
+  users: usersUpdateOneRequiredWithoutUser_rolesNestedInput
+}
+
+input usersUpdateOneRequiredWithoutUser_rolesNestedInput {
+  create: usersCreateWithoutUser_rolesInput
+  connectOrCreate: usersCreateOrConnectWithoutUser_rolesInput
+  upsert: usersUpsertWithoutUser_rolesInput
+  connect: usersWhereUniqueInput
+  update: usersUpdateToOneWithWhereWithoutUser_rolesInput
+}
+
+input usersUpsertWithoutUser_rolesInput {
+  update: usersUpdateWithoutUser_rolesInput!
+  create: usersCreateWithoutUser_rolesInput!
+  where: usersWhereInput
+}
+
+input usersUpdateWithoutUser_rolesInput {
+  id: StringFieldUpdateOperationsInput
+  email: NullableStringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  first_name: NullableStringFieldUpdateOperationsInput
+  last_name: NullableStringFieldUpdateOperationsInput
+  gender: NullableEnumgenderFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  email_verified: NullableBoolFieldUpdateOperationsInput
+  last_login: NullableDateTimeFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  phone_number: NullableStringFieldUpdateOperationsInput
+  reset_token: NullableStringFieldUpdateOperationsInput
+  is_active: NullableBoolFieldUpdateOperationsInput
+  reset_token_expiry: NullableDateTimeFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  state: NullableStringFieldUpdateOperationsInput
+  country: NullableStringFieldUpdateOperationsInput
+  oauth_identities: oauth_identitiesUpdateManyWithoutUsersNestedInput
+  user_otps: user_otpsUpdateOneWithoutUsersNestedInput
+  user_permissions: user_permissionsUpdateManyWithoutUsersNestedInput
+}
+
+input user_permissionsUpdateManyWithoutUsersNestedInput {
+  create: [user_permissionsCreateWithoutUsersInput!]
+  connectOrCreate: [user_permissionsCreateOrConnectWithoutUsersInput!]
+  upsert: [user_permissionsUpsertWithWhereUniqueWithoutUsersInput!]
+  createMany: user_permissionsCreateManyUsersInputEnvelope
+  set: [user_permissionsWhereUniqueInput!]
+  disconnect: [user_permissionsWhereUniqueInput!]
+  delete: [user_permissionsWhereUniqueInput!]
+  connect: [user_permissionsWhereUniqueInput!]
+  update: [user_permissionsUpdateWithWhereUniqueWithoutUsersInput!]
+  updateMany: [user_permissionsUpdateManyWithWhereWithoutUsersInput!]
+  deleteMany: [user_permissionsScalarWhereInput!]
+}
+
+input user_permissionsUpsertWithWhereUniqueWithoutUsersInput {
+  where: user_permissionsWhereUniqueInput!
+  update: user_permissionsUpdateWithoutUsersInput!
+  create: user_permissionsCreateWithoutUsersInput!
+}
+
+input user_permissionsUpdateWithoutUsersInput {
+  id: IntFieldUpdateOperationsInput
+  granted: BoolFieldUpdateOperationsInput
+  granted_at: NullableDateTimeFieldUpdateOperationsInput
+  revoked_at: NullableDateTimeFieldUpdateOperationsInput
+  permissions: permissionsUpdateOneRequiredWithoutUser_permissionsNestedInput
+}
+
+input permissionsUpdateOneRequiredWithoutUser_permissionsNestedInput {
+  create: permissionsCreateWithoutUser_permissionsInput
+  connectOrCreate: permissionsCreateOrConnectWithoutUser_permissionsInput
+  upsert: permissionsUpsertWithoutUser_permissionsInput
+  connect: permissionsWhereUniqueInput
+  update: permissionsUpdateToOneWithWhereWithoutUser_permissionsInput
+}
+
+input permissionsUpsertWithoutUser_permissionsInput {
+  update: permissionsUpdateWithoutUser_permissionsInput!
+  create: permissionsCreateWithoutUser_permissionsInput!
+  where: permissionsWhereInput
+}
+
+input permissionsUpdateWithoutUser_permissionsInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  is_enabled: NullableBoolFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  modules: modulesUpdateOneRequiredWithoutPermissionsNestedInput
+  role_permissions: role_permissionsUpdateManyWithoutPermissionsNestedInput
+}
+
+input role_permissionsUpdateManyWithoutPermissionsNestedInput {
+  create: [role_permissionsCreateWithoutPermissionsInput!]
+  connectOrCreate: [role_permissionsCreateOrConnectWithoutPermissionsInput!]
+  upsert: [role_permissionsUpsertWithWhereUniqueWithoutPermissionsInput!]
+  createMany: role_permissionsCreateManyPermissionsInputEnvelope
+  set: [role_permissionsWhereUniqueInput!]
+  disconnect: [role_permissionsWhereUniqueInput!]
+  delete: [role_permissionsWhereUniqueInput!]
+  connect: [role_permissionsWhereUniqueInput!]
+  update: [role_permissionsUpdateWithWhereUniqueWithoutPermissionsInput!]
+  updateMany: [role_permissionsUpdateManyWithWhereWithoutPermissionsInput!]
+  deleteMany: [role_permissionsScalarWhereInput!]
+}
+
+input role_permissionsUpsertWithWhereUniqueWithoutPermissionsInput {
+  where: role_permissionsWhereUniqueInput!
+  update: role_permissionsUpdateWithoutPermissionsInput!
+  create: role_permissionsCreateWithoutPermissionsInput!
+}
+
+input role_permissionsUpdateWithoutPermissionsInput {
+  id: IntFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  roles: rolesUpdateOneRequiredWithoutRole_permissionsNestedInput
+}
+
+input rolesUpdateOneRequiredWithoutRole_permissionsNestedInput {
+  create: rolesCreateWithoutRole_permissionsInput
+  connectOrCreate: rolesCreateOrConnectWithoutRole_permissionsInput
+  upsert: rolesUpsertWithoutRole_permissionsInput
+  connect: rolesWhereUniqueInput
+  update: rolesUpdateToOneWithWhereWithoutRole_permissionsInput
+}
+
+input rolesUpsertWithoutRole_permissionsInput {
+  update: rolesUpdateWithoutRole_permissionsInput!
+  create: rolesCreateWithoutRole_permissionsInput!
+  where: rolesWhereInput
+}
+
+input rolesUpdateWithoutRole_permissionsInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  is_active: NullableBoolFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  user_roles: user_rolesUpdateManyWithoutRolesNestedInput
+}
+
+input rolesUpdateToOneWithWhereWithoutRole_permissionsInput {
+  where: rolesWhereInput
+  data: rolesUpdateWithoutRole_permissionsInput!
+}
+
+input role_permissionsUpdateWithWhereUniqueWithoutPermissionsInput {
+  where: role_permissionsWhereUniqueInput!
+  data: role_permissionsUpdateWithoutPermissionsInput!
+}
+
+input role_permissionsUpdateManyWithWhereWithoutPermissionsInput {
+  where: role_permissionsScalarWhereInput!
+  data: role_permissionsUpdateManyMutationInput!
+}
+
+input permissionsUpdateToOneWithWhereWithoutUser_permissionsInput {
+  where: permissionsWhereInput
+  data: permissionsUpdateWithoutUser_permissionsInput!
+}
+
+input user_permissionsUpdateWithWhereUniqueWithoutUsersInput {
+  where: user_permissionsWhereUniqueInput!
+  data: user_permissionsUpdateWithoutUsersInput!
+}
+
+input user_permissionsUpdateManyWithWhereWithoutUsersInput {
+  where: user_permissionsScalarWhereInput!
+  data: user_permissionsUpdateManyMutationInput!
+}
+
+input usersUpdateToOneWithWhereWithoutUser_rolesInput {
+  where: usersWhereInput
+  data: usersUpdateWithoutUser_rolesInput!
+}
+
+input user_rolesUpdateWithWhereUniqueWithoutRolesInput {
+  where: user_rolesWhereUniqueInput!
+  data: user_rolesUpdateWithoutRolesInput!
+}
+
+input user_rolesUpdateManyWithWhereWithoutRolesInput {
+  where: user_rolesScalarWhereInput!
+  data: user_rolesUpdateManyMutationInput!
+}
+
+input rolesUpdateManyMutationInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  is_active: NullableBoolFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input permissionsCreateInput {
+  name: String!
+  description: String
+  is_enabled: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+  modules: modulesCreateNestedOneWithoutPermissionsInput!
+  role_permissions: role_permissionsCreateNestedManyWithoutPermissionsInput
+  user_permissions: user_permissionsCreateNestedManyWithoutPermissionsInput
+}
+
+input permissionsCreateManyInput {
+  id: Int
+  module_id: Int!
+  name: String!
+  description: String
+  is_enabled: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input permissionsUpdateInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  is_enabled: NullableBoolFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  modules: modulesUpdateOneRequiredWithoutPermissionsNestedInput
+  role_permissions: role_permissionsUpdateManyWithoutPermissionsNestedInput
+  user_permissions: user_permissionsUpdateManyWithoutPermissionsNestedInput
+}
+
+input permissionsUpdateManyMutationInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  is_enabled: NullableBoolFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input modulesCreateInput {
+  name: String!
+  description: String
+  created_at: DateTime
+  updated_at: DateTime
+  permissions: permissionsCreateNestedManyWithoutModulesInput
+}
+
+input permissionsCreateNestedManyWithoutModulesInput {
+  create: [permissionsCreateWithoutModulesInput!]
+  connectOrCreate: [permissionsCreateOrConnectWithoutModulesInput!]
+  createMany: permissionsCreateManyModulesInputEnvelope
+  connect: [permissionsWhereUniqueInput!]
+}
+
+input permissionsCreateWithoutModulesInput {
+  name: String!
+  description: String
+  is_enabled: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+  role_permissions: role_permissionsCreateNestedManyWithoutPermissionsInput
+  user_permissions: user_permissionsCreateNestedManyWithoutPermissionsInput
+}
+
+input permissionsCreateOrConnectWithoutModulesInput {
+  where: permissionsWhereUniqueInput!
+  create: permissionsCreateWithoutModulesInput!
+}
+
+input permissionsCreateManyModulesInputEnvelope {
+  data: [permissionsCreateManyModulesInput!]!
+  skipDuplicates: Boolean
+}
+
+input permissionsCreateManyModulesInput {
+  id: Int
+  name: String!
+  description: String
+  is_enabled: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input modulesCreateManyInput {
+  id: Int
+  name: String!
+  description: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input modulesUpdateInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  permissions: permissionsUpdateManyWithoutModulesNestedInput
+}
+
+input permissionsUpdateManyWithoutModulesNestedInput {
+  create: [permissionsCreateWithoutModulesInput!]
+  connectOrCreate: [permissionsCreateOrConnectWithoutModulesInput!]
+  upsert: [permissionsUpsertWithWhereUniqueWithoutModulesInput!]
+  createMany: permissionsCreateManyModulesInputEnvelope
+  set: [permissionsWhereUniqueInput!]
+  disconnect: [permissionsWhereUniqueInput!]
+  delete: [permissionsWhereUniqueInput!]
+  connect: [permissionsWhereUniqueInput!]
+  update: [permissionsUpdateWithWhereUniqueWithoutModulesInput!]
+  updateMany: [permissionsUpdateManyWithWhereWithoutModulesInput!]
+  deleteMany: [permissionsScalarWhereInput!]
+}
+
+input permissionsUpsertWithWhereUniqueWithoutModulesInput {
+  where: permissionsWhereUniqueInput!
+  update: permissionsUpdateWithoutModulesInput!
+  create: permissionsCreateWithoutModulesInput!
+}
+
+input permissionsUpdateWithoutModulesInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  is_enabled: NullableBoolFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  role_permissions: role_permissionsUpdateManyWithoutPermissionsNestedInput
+  user_permissions: user_permissionsUpdateManyWithoutPermissionsNestedInput
+}
+
+input permissionsUpdateWithWhereUniqueWithoutModulesInput {
+  where: permissionsWhereUniqueInput!
+  data: permissionsUpdateWithoutModulesInput!
+}
+
+input permissionsUpdateManyWithWhereWithoutModulesInput {
+  where: permissionsScalarWhereInput!
+  data: permissionsUpdateManyMutationInput!
+}
+
+input permissionsScalarWhereInput {
+  AND: [permissionsScalarWhereInput!]
+  OR: [permissionsScalarWhereInput!]
+  NOT: [permissionsScalarWhereInput!]
+  id: IntFilter
+  module_id: IntFilter
+  name: StringFilter
+  description: StringNullableFilter
+  is_enabled: BoolNullableFilter
+  created_at: DateTimeNullableFilter
+  updated_at: DateTimeNullableFilter
+}
+
+input modulesUpdateManyMutationInput {
+  name: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input usersCreateInput {
+  id: String
+  email: String
+  password: String
+  first_name: String
+  last_name: String
+  gender: gender
+  created_at: DateTime
+  updated_at: DateTime
+  email_verified: Boolean
+  last_login: DateTime
+  avatar: String
+  phone_number: String
+  reset_token: String
+  is_active: Boolean
+  reset_token_expiry: DateTime
+  city: String
+  state: String
+  country: String
+  oauth_identities: oauth_identitiesCreateNestedManyWithoutUsersInput
+  user_otps: user_otpsCreateNestedOneWithoutUsersInput
+  user_permissions: user_permissionsCreateNestedManyWithoutUsersInput
+  user_roles: user_rolesCreateNestedManyWithoutUsersInput
+}
+
+input usersCreateManyInput {
+  id: String
+  email: String
+  password: String
+  first_name: String
+  last_name: String
+  gender: gender
+  created_at: DateTime
+  updated_at: DateTime
+  email_verified: Boolean
+  last_login: DateTime
+  avatar: String
+  phone_number: String
+  reset_token: String
+  is_active: Boolean
+  reset_token_expiry: DateTime
+  city: String
+  state: String
+  country: String
+}
+
+input usersUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  email: NullableStringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  first_name: NullableStringFieldUpdateOperationsInput
+  last_name: NullableStringFieldUpdateOperationsInput
+  gender: NullableEnumgenderFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  email_verified: NullableBoolFieldUpdateOperationsInput
+  last_login: NullableDateTimeFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  phone_number: NullableStringFieldUpdateOperationsInput
+  reset_token: NullableStringFieldUpdateOperationsInput
+  is_active: NullableBoolFieldUpdateOperationsInput
+  reset_token_expiry: NullableDateTimeFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  state: NullableStringFieldUpdateOperationsInput
+  country: NullableStringFieldUpdateOperationsInput
+  oauth_identities: oauth_identitiesUpdateManyWithoutUsersNestedInput
+  user_otps: user_otpsUpdateOneWithoutUsersNestedInput
+  user_permissions: user_permissionsUpdateManyWithoutUsersNestedInput
+  user_roles: user_rolesUpdateManyWithoutUsersNestedInput
+}
+
+input usersUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  email: NullableStringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  first_name: NullableStringFieldUpdateOperationsInput
+  last_name: NullableStringFieldUpdateOperationsInput
+  gender: NullableEnumgenderFieldUpdateOperationsInput
+  created_at: NullableDateTimeFieldUpdateOperationsInput
+  updated_at: NullableDateTimeFieldUpdateOperationsInput
+  email_verified: NullableBoolFieldUpdateOperationsInput
+  last_login: NullableDateTimeFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  phone_number: NullableStringFieldUpdateOperationsInput
+  reset_token: NullableStringFieldUpdateOperationsInput
+  is_active: NullableBoolFieldUpdateOperationsInput
+  reset_token_expiry: NullableDateTimeFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  state: NullableStringFieldUpdateOperationsInput
+  country: NullableStringFieldUpdateOperationsInput
+}
+
+input user_permissionsCreateManyInput {
+  id: Int
+  user_id: String!
+  permission_id: Int!
+  granted: Boolean
+  granted_at: DateTime
+  revoked_at: DateTime
+}
+
+input role_permissionsCreateManyInput {
+  id: Int
+  role_id: Int!
+  permission_id: Int!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input user_rolesCreateManyInput {
+  id: Int
+  user_id: String!
+  role_id: Int!
+}
+
+type ApiResponse {
+  statusCode: Float
+  status: String!
+  message: String
+  error: String
+}
+
+input NotificationDto {
+  title: String!
+  body: String!
+  token: String
+  endpointArn: String
+}
+
+type RegisterResponse {
+  statusCode: Float
+  status: String!
+  message: String
+  error: String
+  endpointArn: String
+}
+
+input RegisterDeviceDto {
+  token: String!
+}
+
+input SmsInputDto {
+  number: String!
+  body: String!
+}
+
+input SendEmailDto {
+  to: String!
+  from: String!
+  subject: String!
+  text: String!
+  templateType: EmailTemplateType!
+}
+
+enum EmailTemplateType {
+  FORGOT_PASSWORD
+  OTP
+  SIGNUP
+  STANDARD
+  MARKETING
+}

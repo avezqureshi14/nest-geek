@@ -1,0 +1,8 @@
+export enum AuthType {
+  JWT,
+  REFRESH,
+  NONE,
+  GRAPHQL_JWT,
+  GRAPHQL_REFRESH,
+  SUBSCRIPTION,
+}

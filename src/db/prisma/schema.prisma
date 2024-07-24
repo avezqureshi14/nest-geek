@@ -1,0 +1,157 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nestgraphql {
+  provider = "node node_modules/prisma-nestjs-graphql"
+  output   = "../@generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id                 String             @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  email              String?            @unique @db.VarChar(255)
+  password           String?            @db.VarChar(255)
+  first_name         String?            @db.VarChar(255)
+  last_name          String?            @db.VarChar(255)
+  gender             gender?
+  created_at         DateTime?          @default(now()) @db.Timestamp(6)
+  updated_at         DateTime?          @default(now()) @db.Timestamp(6)
+  email_verified     Boolean?           @default(false)
+  last_login         DateTime?          @db.Timestamp(6)
+  avatar             String?            @db.VarChar(255)
+  phone_number       String?            @unique @db.VarChar(20)
+  reset_token        String?
+  is_active          Boolean?           @default(true)
+  reset_token_expiry DateTime?          @db.Timestamp(6)
+  city               String?            @db.VarChar(255)
+  state              String?            @db.VarChar(255)
+  country            String?            @db.VarChar(255)
+  oauth_identities   oauth_identities[]
+  user_otps          user_otps?
+  user_permissions   user_permissions[]
+  user_roles         user_roles[]
+
+  @@index([email], map: "idx_users_email")
+}
+
+model oauth_identities {
+  id            Int       @id @default(autoincrement())
+  user_id       String    @db.Uuid
+  provider_name providers
+  provider_id   String    @db.VarChar(255)
+  expires_at    DateTime? @db.Timestamp(6)
+  users         users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([provider_name, provider_id], map: "uq_provider_identity")
+  @@unique([user_id, provider_name], map: "uq_user_provider")
+  @@index([provider_name], map: "idx_oauth_identities_provider_name")
+  @@index([user_id], map: "idx_oauth_identities_user_id")
+}
+
+model user_otps {
+  id         String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id    String    @unique(map: "unique_user_id") @db.Uuid
+  otp_value  String    @db.VarChar(255)
+  count      Int?      @default(0)
+  expires_at DateTime? @db.Timestamp(6)
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  is_used    Boolean?  @default(false)
+  purpose    String?   @db.VarChar(255)
+  users      users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([user_id], map: "idx_user_otps_user_id")
+}
+
+model modules {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique @db.VarChar(255)
+  description String?
+  created_at  DateTime?     @default(now()) @db.Timestamp(6)
+  updated_at  DateTime?     @default(now()) @db.Timestamp(6)
+  permissions permissions[]
+}
+
+model permissions {
+  id               Int                @id @default(autoincrement())
+  module_id        Int
+  name             String             @db.VarChar(255)
+  description      String?
+  is_enabled       Boolean?           @default(true)
+  created_at       DateTime?          @default(now()) @db.Timestamp(6)
+  updated_at       DateTime?          @default(now()) @db.Timestamp(6)
+  modules          modules            @relation(fields: [module_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  role_permissions role_permissions[]
+  user_permissions user_permissions[]
+
+  @@unique([module_id, name], map: "uq_permission_module")
+}
+
+model role_permissions {
+  id            Int         @default(autoincrement())
+  role_id       Int
+  permission_id Int
+  created_at    DateTime?   @default(now()) @db.Timestamp(6)
+  updated_at    DateTime?   @default(now()) @db.Timestamp(6)
+  permissions   permissions @relation(fields: [permission_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  roles         roles       @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([id, role_id, permission_id])
+}
+
+model roles {
+  id               Int                @id @default(autoincrement())
+  name             String             @unique @db.VarChar(255)
+  description      String?
+  is_active        Boolean?           @default(true)
+  created_at       DateTime?          @default(now()) @db.Timestamp(6)
+  updated_at       DateTime?          @default(now()) @db.Timestamp(6)
+  role_permissions role_permissions[]
+  user_roles       user_roles[]
+}
+
+model user_permissions {
+  id            Int         @default(autoincrement())
+  user_id       String      @db.Uuid
+  permission_id Int
+  granted       Boolean     @default(true)
+  granted_at    DateTime?   @default(now()) @db.Timestamp(6)
+  revoked_at    DateTime?   @db.Timestamp(6)
+  permissions   permissions @relation(fields: [permission_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users         users       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([id, user_id, permission_id])
+}
+
+model user_roles {
+  id      Int    @default(autoincrement())
+  user_id String @db.Uuid
+  role_id Int
+  roles   roles  @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users   users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([id, user_id, role_id])
+}
+
+enum user_role {
+  admin
+  user
+  guest
+}
+
+enum providers {
+  Google
+  Facebook
+  LinkedIn
+  Apple
+}
+
+enum gender {
+  Male
+  Female
+  Others
+}
